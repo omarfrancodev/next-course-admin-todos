@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma';
 import { NextResponse, NextRequest } from 'next/server'
 
-interface CustomResponse {
+interface CustomPaginationResponse {
     metadata: {
         total: number,
         limit: number,
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
     const prev = (offset - limit < 0) ? null : `${origin}${pathname}?limit=${limit}&offset=${offset - limit}`;
     const next = (offset + limit >= totalTodos) ? null : `${origin}${pathname}?limit=${limit}&offset=${offset + limit}`;
 
-    const response: CustomResponse = {
+    const response: CustomPaginationResponse = {
         metadata: {
             total: totalTodos,
             limit: limit,
