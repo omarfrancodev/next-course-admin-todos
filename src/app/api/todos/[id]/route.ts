@@ -12,9 +12,10 @@ const getTodo = async (id: string) => await prisma.todo.findFirst({ where: { id 
 
 
 export async function GET(request: Request, { params }: Segments) {
-    const todo = await getTodo(params.id);
+    const { id } = await params
+    const todo = await getTodo(id);
 
-    if (!todo) return NextResponse.json({ message: `Todo with id ${params.id} not found` }, { status: 404 });
+    if (!todo) return NextResponse.json({ message: `Todo with id ${id} not found` }, { status: 404 });
 
     return NextResponse.json(todo, { status: 200 });
 }
@@ -25,13 +26,14 @@ const putSchema = object({
 });
 
 export async function PUT(req: Request, { params }: Segments) {
-    const todo = await getTodo(params.id);
+    const { id } = await params;
+    const todo = await getTodo(id);
 
-    if (!todo) return NextResponse.json({ message: `Todo with id ${params.id} not found` }, { status: 404 });
+    if (!todo) return NextResponse.json({ message: `Todo with id ${id} not found` }, { status: 404 });
     try {
 
         const { description, complete } = await putSchema.validate(await req.json());
-        const updatedTodo = await prisma.todo.update({ where: { id: params.id }, data: { description, complete } });
+        const updatedTodo = await prisma.todo.update({ where: { id: id }, data: { description, complete } });
 
         return NextResponse.json(updatedTodo, { status: 200 });
     } catch (error) {
