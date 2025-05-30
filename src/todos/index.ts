@@ -5,3 +5,5 @@ export { NewTodo } from './components/NewTodo';
 
 // Helpers
 export { updateTodo, createTodo, deleteCompletedTodos, fillTodos } from './helpers/todos';
+
+export { toggleTodo, addTodo } from './actions/todo-actions'
