@@ -8,7 +8,14 @@ docker compose up -d
 
 2. Renombra el `.env.example` a `.env`
 3. Reemplezar las varaibles de entorno
-4. Ejecutar el SEED para [llenar la base de datos](localhost:3000/api/seed)
+4. Ejecutar el comando ```npm install```
+5. Ejecutar el comando ```npm run dev```
+6. Ejecutar los comandos de prisma
+```
+npx prisma migrate dev
+npx prisma generate
+```
+7. Ejecutar el SEED para [llenar la base de datos](localhost:3000/api/seed)
 
 # Prisma commands
 ```

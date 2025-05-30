@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+.link {
+  @apply px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 cursor-pointer hover:bg-sky-400/30;
+}
+
+.active-link {
+  @apply relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400 cursor-pointer;
+}
+
+.active-title {
+  @apply -mr-1 font-medium;
+}
