@@ -19,7 +19,7 @@ const navigation = [
     },
     {
         name: 'Server Actions',
-        path: '#',
+        path: '/dashboard/server-todos',
         icon: <IoListOutline size={30} />
     }
 ]

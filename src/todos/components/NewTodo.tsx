@@ -1,33 +1,35 @@
 'use client';
 
 import { IoTrashOutline } from "react-icons/io5";
-import * as todosApi from '@/todos/helpers/todos';
+// import * as todosApi from '@/todos/helpers/todos';
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { IoMdColorFill } from "react-icons/io";
+import { addTodo, deleteCompleted, fillTodos } from "../actions/todo-actions";
 
 export const NewTodo = () => {
-    const router = useRouter();
+    // const router = useRouter();
     const [description, setDescription] = useState('')
 
     const onSubmit = async (event: FormEvent) => {
         event.preventDefault();
         if (description.trim().length === 0) return;
 
-        await todosApi.createTodo(description);
+        // await todosApi.createTodo(description);
+        await addTodo(description);
         setDescription('');
-        router.refresh();
+        // router.refresh();
     }
 
-    const deleteCompleted = async () => {
-        await todosApi.deleteCompletedTodos();
-        router.refresh();
-    }
+    // const deleteCompleted = async () => {
+    //     // await todosApi.deleteCompletedTodos();
+    //     // router.refresh();
+    // }
 
-    const fillTodos = async () => {
-        await todosApi.fillTodos();
-        router.refresh();
-    }
+    // const fillTodos = async () => {
+    //     // await todosApi.fillTodos();
+    //     // router.refresh();
+    // }
 
     return (
         <form onSubmit={onSubmit} className='flex w-full'>
