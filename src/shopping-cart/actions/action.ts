@@ -1,28 +1,34 @@
-//'use client';
+'use server'
+// app/shopping-cart/actions/action.ts
+import { cookies } from 'next/headers'
 
-import { getCookie, hasCookie, setCookie } from "cookies-next"
-
-export const getCookieCart = async (): Promise<{ [id: string]: number }> => {
-    if (hasCookie('cart')) {
-        const cookieCart = JSON.parse(await getCookie('cart') as string ?? '{}');
-        return cookieCart
-    }
-
-    return {};
+export async function getCookieCart() {
+    const cookieStore = await cookies()
+    const existing = cookieStore.get('cart')?.value || '{}'
+    return JSON.parse(existing)
 }
 
+export async function addProductToCart(id: string) {
+    const cookieStore = await cookies()
+    const cart = await getCookieCart();
 
-export const addProductToCart = async (id: string) => {
-    const cookieCart = await getCookieCart();
-    cookieCart[id] = (cookieCart[id] || 0) + 1;
-    await setCookie('cart', JSON.stringify(cookieCart));
+    cart[id] = (cart[id] || 0) + 1
+
+    cookieStore.set({
+        name: 'cart',
+        value: JSON.stringify(cart),
+        path: '/',
+    })
 }
 
-export const removeProductFromCart = async (id: string) => {
-    const cookieCart = await getCookieCart();
+export async function removeProductFromCart(id: string) {
+    const cookieStore = await cookies()
+    const cart = await getCookieCart();
+    delete cart[id]
 
-    if (!cookieCart[id]) return;
-
-    delete cookieCart[id];
-    await setCookie('cart', JSON.stringify(cookieCart));
+    cookieStore.set({
+        name: 'cart',
+        value: JSON.stringify(cart),
+        path: '/',
+    })
 }

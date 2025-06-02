@@ -6,6 +6,7 @@ import { IoAddCircleOutline, IoTrashOutline } from "react-icons/io5"
 import { StarRating } from "./StarRating";
 import { addProductToCart, removeProductFromCart } from "@/shopping-cart/actions/action";
 import { useRouter } from "next/navigation";
+import { startTransition } from "react";
 
 interface Props {
     id: string;
@@ -18,14 +19,19 @@ interface Props {
 export const ProductCard = ({ id, name, price, rating, image }: Props) => {
     const router = useRouter();
 
-    const onAddToCart = async () => {
-        await addProductToCart(id);
-        router.refresh();
+    const onAddToCart = () => {
+        startTransition(async () => {
+            await addProductToCart(id)
+            // fuerza un refetch en el servidor para que TopMenu lea la nueva cookie
+            router.refresh()
+        })
     }
 
-    const onRemoveFromCart = async () => {
-        await removeProductFromCart(id);
-        router.refresh();
+    const onRemoveFromCart = () => {
+        startTransition(async () => {
+            await removeProductFromCart(id)
+            router.refresh()
+        })
     }
 
 

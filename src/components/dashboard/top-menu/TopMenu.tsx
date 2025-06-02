@@ -2,17 +2,19 @@ import { cookies } from 'next/headers';
 import React from 'react'
 import { CiMenuBurger, CiSearch, CiChat1, CiShoppingBasket } from 'react-icons/ci'
 
+const getTotalCount = (cart: { [id: string]: number }) => {
+    let count = 0;
+    Object.values(cart).forEach((value) => {
+        count += value as number
+    })
+    return count;
+}
+
 export const TopMenu = async () => {
     const cookieStore = await cookies();
     const cart = JSON.parse(cookieStore.get('cart')?.value || '{}');
 
-    const getTotalCount = () => {
-        let count = 0;
-        Object.values(cart).forEach((value) => {
-            count += value as number
-        })
-        return count;
-    }
+    const totalCount = getTotalCount(cart);
 
     return (
         <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
@@ -39,7 +41,9 @@ export const TopMenu = async () => {
                         <CiChat1 size={25} />
                     </button>
                     <button className="flex items-center justify-center w-10 h-10 rounded-xl border bg-gray-100 focus:bg-gray-100 active:bg-gray-200">
-                        <span className='text-sm mr-1 text-blue-700 font-bold'>{getTotalCount()}</span>
+                        {
+                            totalCount > 0 && (<span className='text-sm mx-1 text-blue-700 font-bold'>{totalCount}</span>)
+                        }
                         <CiShoppingBasket size={25} />
                     </button>
                 </div>
