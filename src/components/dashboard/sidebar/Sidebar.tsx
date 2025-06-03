@@ -4,7 +4,8 @@ import React from 'react'
 import { CiLogout } from 'react-icons/ci'
 import { SidebarItem } from '../sidebar-item/SidebarItem'
 import { MdDashboard } from 'react-icons/md'
-import { IoCheckboxOutline, IoListOutline } from 'react-icons/io5'
+import { IoBasketOutline, IoCheckboxOutline, IoListOutline } from 'react-icons/io5'
+import { FaCookie } from 'react-icons/fa'
 
 const navigation = [
     {
@@ -21,6 +22,16 @@ const navigation = [
         name: 'Server Actions',
         path: '/dashboard/server-todos',
         icon: <IoListOutline size={30} />
+    },
+    {
+        name: 'Cookies',
+        path: '/dashboard/cookies',
+        icon: <FaCookie size={30} />
+    },
+    {
+        name: 'Products',
+        path: '/dashboard/products',
+        icon: <IoBasketOutline size={30} />
     }
 ]
 
