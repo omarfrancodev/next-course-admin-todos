@@ -4,7 +4,7 @@
 import Image from "next/image"
 import { IoAddCircleOutline, IoTrashOutline } from "react-icons/io5"
 import { StarRating } from "./StarRating";
-import { addProductToCart, removeProductFromCart } from "@/shopping-cart/actions/action";
+import { addProductToCart, removeProductFromCart } from "@/shopping-cart/actions/actions";
 import { useRouter } from "next/navigation";
 import { startTransition } from "react";
 

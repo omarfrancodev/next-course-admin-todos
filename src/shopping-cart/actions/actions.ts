@@ -32,3 +32,21 @@ export async function removeProductFromCart(id: string) {
         path: '/',
     })
 }
+
+export async function removeSingleItemFromCart(id: string) {
+    const cookieStore = await cookies()
+    const cart = await getCookieCart();
+
+    if (cart[id] > 1) {
+        cart[id] -= 1
+
+    } else {
+        delete cart[id]
+    }
+
+    cookieStore.set({
+        name: 'cart',
+        value: JSON.stringify(cart),
+        path: '/',
+    })
+}
