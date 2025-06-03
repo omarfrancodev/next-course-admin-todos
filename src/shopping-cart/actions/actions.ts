@@ -37,9 +37,10 @@ export async function removeSingleItemFromCart(id: string) {
     const cookieStore = await cookies()
     const cart = await getCookieCart();
 
+    if (!cart[id]) return;
+
     if (cart[id] > 1) {
         cart[id] -= 1
-
     } else {
         delete cart[id]
     }
