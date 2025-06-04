@@ -1,13 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import { CiLogout } from 'react-icons/ci'
 import { SidebarItem } from '../sidebar-item/SidebarItem'
 import { MdDashboard } from 'react-icons/md'
 import { IoBasketOutline, IoCheckboxOutline, IoListOutline, IoPersonOutline } from 'react-icons/io5'
 import { FaCookie } from 'react-icons/fa'
-import { auth, signOut } from '@/auth'
+import { auth, signIn } from '@/auth'
 import { redirect } from 'next/navigation'
+import { SignOut } from '@/components/sign-out/sign-out'
+import { signInAction, signOutAction } from '@/auth/actions/session-actions'
 
 const navigation = [
     {
@@ -45,12 +46,8 @@ const navigation = [
 export const Sidebar = async () => {
     const session = await auth()
 
-    if (!session) {
-        redirect('/api/auth/signin');
-    }
-
-    const userAvatar = session.user?.image ?? ''
-    const userName = session.user?.name ?? ''
+    const userAvatar = session?.user?.image ?? "https://avatars.githubusercontent.com/u/31113941?v=4"
+    const userName = session?.user?.name ?? ''
 
     return (
         <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
@@ -65,6 +62,7 @@ export const Sidebar = async () => {
                 </div>
 
                 <div className="mt-8 text-center">
+
                     <Image src={userAvatar}
                         width={40}
                         height={40}
@@ -88,18 +86,21 @@ export const Sidebar = async () => {
             </div>
 
             <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-                {/* <form
-                    onSubmit={async () => {
-                        // "use server"
-                        await signOut()
-                    }}
-                >
-                    <button type='submit' className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group hover:bg-gray-100 cursor-pointer">
-                        <CiLogout />
-                        <span className="group-hover:text-gray-700">Logout</span>
-                    </button>
-                </form> */}
+                {session != null
+                    ? (
+                        <SignOut action={signOutAction}>
+                            <CiLogout />
+                            <span className="group-hover:text-gray-700">Logout</span>
+                        </SignOut>
+                    )
+                    : (
+                        <SignOut action={signInAction}>
+                            <CiLogout />
+                            <span className="group-hover:text-gray-700">Login</span>
+                        </SignOut>
+                    )}
+
             </div>
-        </aside>
+        </aside >
     )
 }

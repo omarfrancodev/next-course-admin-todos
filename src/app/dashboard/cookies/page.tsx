@@ -1,6 +1,8 @@
+import { signInWithGithub } from "@/auth/index";
 import { TabBar } from "@/components";
-import SignIn from "@/components/sign-in/sign-in";
+import { SignIn } from "@/components/sign-in/sign-in";
 import { cookies } from "next/headers";
+import { FaGithub } from "react-icons/fa6";
 
 
 export const metadata = {
@@ -17,7 +19,9 @@ export default async function CookiesPage() {
             <div className="flex flex-col">
                 <span className="text-3xl">Tabs</span>
                 <TabBar currentTab={selectedTab} />
-                <SignIn />
+                <SignIn action={signInWithGithub}>
+                    Signin with GitHub<FaGithub size={20} />
+                </SignIn>
             </div>
         </div>
     );

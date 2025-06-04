@@ -14,8 +14,6 @@ export default async function DashboardPage() {
         redirect('/api/auth/signin');
     }
 
-    // if (!session?.user) return null
-
     return (
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
             <WidgetItem title="Usuario conectado server side">
