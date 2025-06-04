@@ -1,23 +1,18 @@
-import { auth } from "@/auth";
+"use client"
 import { WidgetItem } from "@/components";
+import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation";
 
 
-export const metadata = {
-    title: 'Dashboard',
-    description: 'Dashboard',
-};
+export default function ProfilePage() {
+    const { data: session } = useSession()
 
-export default async function DashboardPage() {
-    const session = await auth();
     if (!session) {
         redirect('/api/auth/signin');
     }
 
-    // if (!session?.user) return null
-
     return (
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+        <div>
             <WidgetItem title="Usuario conectado server side">
                 <div className="flex flex-col gap-2">
                     <span className="text-lg font-semibold">Nombre: {session.user?.name}</span>
