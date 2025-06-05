@@ -47,7 +47,7 @@ export const Sidebar = async () => {
     const session = await auth()
 
     const userAvatar = session?.user?.image ?? "https://avatars.githubusercontent.com/u/31113941?v=4"
-    const userName = session?.user?.name ?? ''
+    const userName = session?.user?.name ?? 'User'
     const userRoles = session?.user?.roles ?? []
 
     return (
