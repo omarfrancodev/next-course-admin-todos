@@ -1,4 +1,4 @@
 export { AuthProviderWrapper } from "./provider/AuthProvider"
 
 // Actions
-export { signInWithGithub, signInAction, signOutAction } from "./actions/session-actions"
+export { signInWithGithub, signInAction, signOutAction } from "./actions/auth-actions"

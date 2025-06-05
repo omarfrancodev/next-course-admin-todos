@@ -8,7 +8,7 @@ import { FaCookie } from 'react-icons/fa'
 import { auth, signIn } from '@/auth'
 import { redirect } from 'next/navigation'
 import { SignOut } from '@/components/sign-out/sign-out'
-import { signInAction, signOutAction } from '@/auth/actions/session-actions'
+import { signInAction, signOutAction } from '@/auth/actions/auth-actions'
 
 const navigation = [
     {

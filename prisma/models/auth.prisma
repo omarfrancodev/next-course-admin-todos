@@ -1,13 +1,16 @@
 model User {
-    id            String          @id @default(uuid())
+    id            String    @id @default(uuid())
     name          String?
-    email         String          @unique
+    password      String?
+    email         String    @unique
     emailVerified DateTime?
     image         String?
-    roles         String[]        @default(["user"])
-    isActive      Boolean         @default(true)
+    roles         String[]  @default(["user"])
+    isActive      Boolean   @default(true)
     accounts      Account[]
     sessions      Session[]
+
+    todos         Todo[]
     // Optional for WebAuthn support
     Authenticator Authenticator[]
 
