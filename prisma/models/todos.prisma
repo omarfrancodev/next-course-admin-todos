@@ -1,7 +1,10 @@
 model Todo {
-    id          String   @id @default(uuid())
+    id          String  @id @default(uuid())
     description String
-    complete    Boolean  @default(false)
-    createdAt   DateTime @default(dbgenerated("CURRENT_TIMESTAMP(6)")) @db.Timestamptz(6)
-    updatedAt   DateTime @updatedAt @db.Timestamptz(6)
+    complete    Boolean @default(false)
+    user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId      String
+
+    createdAt DateTime @default(dbgenerated("CURRENT_TIMESTAMP(6)")) @db.Timestamptz(6)
+    updatedAt DateTime @updatedAt @db.Timestamptz(6)
 }

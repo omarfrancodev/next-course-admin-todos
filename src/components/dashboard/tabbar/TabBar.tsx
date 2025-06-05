@@ -20,10 +20,10 @@ export const TabBar = ({ currentTab = 1, tabOptions = [1, 2, 3, 4] }: Props) => 
         setCookie('selectedTab', tab.toString());
     }
 
+    const gridCols = 'grid-cols-' + tabOptions.length
+
     return (
-        <div className={`
-            grid ${'grid-cols-' + tabOptions.length} w-full space-x-2 rounded-xl bg-gray-200 p-2
-        `}>
+        <div className={`grid ${gridCols} w-full space-x-2 rounded-xl bg-gray-200 p-2`}>
             {
                 tabOptions.map((tab) => (
                     <div key={tab}>

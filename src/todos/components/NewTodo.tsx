@@ -7,7 +7,11 @@ import { FormEvent, useState } from "react";
 import { IoMdColorFill } from "react-icons/io";
 import { addTodo, deleteCompleted, fillTodos } from "../actions/todo-actions";
 
-export const NewTodo = () => {
+interface Props {
+    userId: string
+}
+
+export const NewTodo = ({ userId }: Props) => {
     // const router = useRouter();
     const [description, setDescription] = useState('')
 
@@ -16,7 +20,7 @@ export const NewTodo = () => {
         if (description.trim().length === 0) return;
 
         // await todosApi.createTodo(description);
-        await addTodo(description);
+        await addTodo(description, userId);
         setDescription('');
         // router.refresh();
     }
@@ -51,7 +55,7 @@ export const NewTodo = () => {
             </button>
 
             <button
-                onClick={() => deleteCompleted()}
+                onClick={() => deleteCompleted(userId)}
                 type='button' className="flex items-center justify-center gap-2 rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all cursor-pointer">
                 <IoTrashOutline />
                 Borrar Completados
